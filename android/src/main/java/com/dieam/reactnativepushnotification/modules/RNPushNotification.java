@@ -58,13 +58,10 @@ public class RNPushNotification extends ReactContextBaseJavaModule implements Ac
         return constants;
     }
 
-    public void onNewIntent(Intent intent) {
-        if (intent.hasExtra("notification")) {
-            Bundle bundle = intent.getBundleExtra("notification");
-            bundle.putBoolean("foreground", false);
-            intent.putExtra("notification", bundle);
-            mJsDelivery.notifyNotification(bundle);
-        }
+     public void onNewIntent(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        bundle.putBoolean("foreground", false);
+        mJsDelivery.notifyNotification(bundle);
     }
 
     private void registerNotificationsRegistration() {
